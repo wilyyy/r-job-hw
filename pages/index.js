@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-
 import StudentCard from "@/components/StudentCard";
-import { interpolateAs } from "next/dist/shared/lib/router/router";
 
 const Page = styled.div`
   width: 100vw;
@@ -79,11 +77,24 @@ export default function Home() {
           value={name}
           onChange={e => setName(e.target.value)}
         />
+        <TextInput
+          type="text"
+          placeholder="Search by tag"
+          // value={name}
+          // onChange={e => setName(e.target.value)}
+        />
         <ScrollCont>
           {data
             .filter(el => {
               if(!name) return true;
-              if(el.firstName.toLowerCase().includes(name) || el.lastName.toLowerCase().includes(name)){
+              if(
+                el.firstName.toLowerCase().includes(name) || 
+                el.lastName.toLowerCase().includes(name) ||
+                el.firstName.toUpperCase().includes(name) || 
+                el.lastName.toUpperCase().includes(name) ||
+                el.firstName.includes(name) || 
+                el.lastName.includes(name) 
+              ){
                 return true;
               }
             })
