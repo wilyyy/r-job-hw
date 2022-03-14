@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { v4 as uuidv4 } from 'uuid';
 import axios from "axios";
 import StudentCard from "@/components/StudentCard";
 
@@ -54,6 +55,8 @@ const TextInput = styled.input`
 export default function Home() {
   const [data, setData] = useState([]);
   const [name, setName] = useState();
+
+  const uid = uuidv4();
 
   useEffect(() => {
     const ShowData = async() => {

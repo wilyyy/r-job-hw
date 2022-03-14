@@ -7,14 +7,15 @@ const initialStates = {
 
 const MyContext = createContext(initialStates);
 
-const AppProvider = ({children}) => {
+export default function AppProvider({children}) {
     const [tags, setTags] = useState(initialStates.tags);
-    <MyContext.Provider value={{tags, setTags}}>
-        {children}
-    </MyContext.Provider>
-}
 
-export default AppProvider;
+    return (
+        <MyContext.Provider value={{tags, setTags}}>
+            {children}
+        </MyContext.Provider>
+    )
+}
 
 export const useTags = () => {
     const {tags, setTags} = useContext(MyContext);

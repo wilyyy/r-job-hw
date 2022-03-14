@@ -1,5 +1,7 @@
 import { useState, useRef } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import styled from "styled-components";
+import { useTags } from "@/utils/AppProvider";
 
 const Container = styled.div`
     width: 100%;
@@ -98,10 +100,12 @@ export default function StudentCard({
     grades,
     skill,
     pic
-}){
+}) {
     const [expand, setExpand] = useState(false);
-    const [tags, setTags] = useState([]);
+    const {tags, setTags} = useTags();
     const InputRef = useRef();
+
+    // const uid = uuidv4();
 
     const AddTag = (e, tagText) => {
         if(e.key === 'Enter'){
