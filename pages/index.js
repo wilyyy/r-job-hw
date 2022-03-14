@@ -102,8 +102,9 @@ export default function Home() {
                 return true;
               }
             })
-            .map((el) => 
+            .map((el, index) => 
               <StudentInfo 
+                key={index}
                 data={el}
               />
           )}
