@@ -118,7 +118,7 @@ export default function StudentCard({
         <Container>
             <Row>
                 <ImageCont>
-                    <img src={pic} />
+                    <img src={pic} alt="avatar pic"/>
                 </ImageCont>
                 <Column>
                     <h1>{firstName.toUpperCase()} {lastName.toUpperCase()}</h1>
@@ -132,7 +132,7 @@ export default function StudentCard({
                     {expand === true &&
                         <ul>
                             {grades.map((el, index) => 
-                                <li>Test {index + 1}: {el}</li>
+                                <li key={index}>Test {index + 1}: {el}</li>
                             )} 
                         </ul>      
                     }

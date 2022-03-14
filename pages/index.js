@@ -56,7 +56,6 @@ const TextInput = styled.input`
 export default function Home() {
   const [data, setData] = useState([]);
   const [name, setName] = useState();
-
   const uid = uuidv4();
 
   useEffect(() => {
