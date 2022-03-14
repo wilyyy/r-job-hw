@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from 'uuid';
 import axios from "axios";
-import StudentCard from "@/components/StudentCard";
+import StudentInfo from "@/components/StudentInfo";
+import { useTags } from "@/utils/AppProvider";
+
 //
 
 const Page = styled.div`
@@ -56,7 +58,8 @@ const TextInput = styled.input`
 export default function Home() {
   const [data, setData] = useState([]);
   const [name, setName] = useState();
-  const uid = uuidv4();
+  const [tagSearch, setTagSearch] = useState();
+  const {tags, setTags} = useTags();
 
   useEffect(() => {
     const ShowData = async() => {
@@ -69,6 +72,7 @@ export default function Home() {
     }
 
     ShowData();
+    console.log(tags);
   }, []);
 
   return (
@@ -83,35 +87,24 @@ export default function Home() {
         <TextInput
           type="text"
           placeholder="Search by tag"
-          // value={name}
-          // onChange={e => setName(e.target.value)}
+          value={tagSearch}
+          onChange={e => setTagSearch(e.target.value)}
         />
         <ScrollCont>
           {data
             .filter(el => {
               if(!name) return true;
               if(
-                el.firstName.toLowerCase().includes(name) || 
-                el.lastName.toLowerCase().includes(name) ||
-                el.firstName.toUpperCase().includes(name) || 
-                el.lastName.toUpperCase().includes(name) ||
-                el.firstName.includes(name) || 
-                el.lastName.includes(name) 
+                el.firstName.toLowerCase().includes(name.toLowerCase()) || 
+                el.lastName.toLowerCase().includes(name.toLowerCase())
+                // tags[el.id]?tags[el.id].includes(tagSearch.toLowerCase()) : false
               ){
                 return true;
               }
             })
-            .map((el, index) => 
-              <StudentCard 
-                key={index}
-                city={el.city}
-                company={el.company}
-                email={el.email}
-                firstName={el.firstName}
-                lastName={el.lastName}
-                grades={el.grades}
-                skill={el.skill}
-                pic={el.pic}
+            .map((el) => 
+              <StudentInfo 
+                data={el}
               />
           )}
         </ScrollCont>

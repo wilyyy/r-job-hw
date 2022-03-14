@@ -1,7 +1,7 @@
 import {useContext, createContext, useState} from 'react';
 
 const initialStates = {
-    tags: [],
+    tags: {},
     setTags: ()=>{}
 }
 

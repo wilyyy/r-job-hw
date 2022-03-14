@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <AppProvider>
       <Head>
-        <title>Ramani React Assessment</title>
+        <title>Hatchways React Assessment</title>
       </Head>
       <Component {...pageProps} />
     </AppProvider>
