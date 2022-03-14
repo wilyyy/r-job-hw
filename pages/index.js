@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { v4 as uuidv4 } from 'uuid';
 import axios from "axios";
 import StudentInfo from "@/components/StudentInfo";
 import { useTags } from "@/utils/AppProvider";
-
-//
 
 const Page = styled.div`
   width: 100vw;
@@ -92,16 +89,32 @@ export default function Home() {
         />
         <ScrollCont>
           {data
+            //Filter by name
             .filter(el => {
               if(!name) return true;
               if(
-                el.firstName.toLowerCase().includes(name.toLowerCase()) || 
-                el.lastName.toLowerCase().includes(name.toLowerCase())
-                // tags[el.id]?tags[el.id].includes(tagSearch.toLowerCase()) : false
-              ){
+                el.firstName.toLowerCase().includes(name?.toLowerCase()) || 
+                el.lastName.toLowerCase().includes(name?.toLowerCase())                 
+              ) {
                 return true;
+              } else {
+                return false;
               }
             })
+
+            //Filter by tags added
+            .filter (el => {
+              let curr = tags[el.id] || [];
+              if(!tagSearch) return true;
+              if(
+                curr.includes(tagSearch?.toLowerCase())
+              ) {
+                return true;
+              } else {
+                return false;
+              }
+            })
+
             .map((el, index) => 
               <StudentInfo 
                 key={index}

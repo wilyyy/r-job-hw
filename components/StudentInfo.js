@@ -91,18 +91,7 @@ const Tag = styled.div`
     border-radius: 5px;
 `;
 
-export default function StudentInfo({
-    // city,
-    // company,
-    // email,
-    // firstName,
-    // lastName,
-    // grades,
-    // skill,
-    // pic,
-    // myId
-    data
-}) {
+export default function StudentInfo({data}) {
     const [expand, setExpand] = useState(false);
     const {tags, setTags} = useTags();
     const InputRef = useRef();
@@ -110,12 +99,12 @@ export default function StudentInfo({
     const AddTag = (e, tagText) => {
         if(e.key === 'Enter'){
             InputRef.current.value = "";
-            let currentTag = tags[data.id] || []
-            const tagArray = [...currentTag, tagText]
+            let currentTag = tags[data.id] || [];
+            const tagArray = [...currentTag, tagText];
             const tagObj = {
                 ...tags,
-            }
-            tagObj[data.id] = tagArray
+            };
+            tagObj[data.id] = tagArray;
             setTags(tagObj);
         }
     }
